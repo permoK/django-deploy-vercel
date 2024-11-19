@@ -39,10 +39,39 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts'
+    'accounts',
+    'Authentication',
+
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),    # Adjust as needed, e.g., 1 hour
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),       # Adjust as needed, e.g., 7 days
+    'ROTATE_REFRESH_TOKENS': True,                     # Optionally, rotate tokens on refresh
+    'BLACKLIST_AFTER_ROTATION': True,                  # Enable blacklisting if rotation is used
+}
+
+
+# settings.py additions
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+# Important: Add this to specify our custom user model
+AUTH_USER_MODEL = 'Authentication.Farmer'
+
+
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
