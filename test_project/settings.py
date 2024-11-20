@@ -65,7 +65,7 @@ REST_FRAMEWORK = {
 }
 
 # Important: Add this to specify our custom user model
-AUTH_USER_MODEL = 'Authentication.Farmer'
+# AUTH_USER_MODEL = 'Authentication.Farmer'
 
 
 
@@ -106,12 +106,27 @@ WSGI_APPLICATION = 'test_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+################sqlite3#########################
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+################sqlite3########################
+
+##############postgres########################
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.petsewlfrwamgonrrdyb',
+        'PASSWORD': 'Pk@11241008075',
+        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',   # Or the hostname where your MySQL server is running
+        'PORT': '6543',        # Default PSQL port
     }
 }
+#####################end postgress####################
 
 
 # Password validation
